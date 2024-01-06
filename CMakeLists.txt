@@ -3,4 +3,7 @@ project(Othello C)
 
 set(CMAKE_C_STANDARD 23)
 
-add_executable(Othello main.c)
+add_executable(Othello main.c
+        game_actions.h
+        start_end_game.h
+        online_data.h)
