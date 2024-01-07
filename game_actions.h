@@ -31,95 +31,185 @@ void positioning(char board[8][8],int turn){
         for(int j=0;j<8;j++){
             if(turn==1){
                 if(flag_board[i][j]==1){
-                    for(int k=1;k<4;k++){
-                        if(flag_board[i+k][j]==2){
-                            if(board[i+k+1][j]!='W' && board[i+k+1][j]!='B'){
-                                board[i+k+1][j]='*';
+                    if(board[i+1][j]=='B') {
+                        for (int k = i + 2; k < 8; k++) {
+                            if (board[k][j] == 'W' || board[k][j] == '*') {
+                                break;
+                            }
+                            if (board[k][j] == '.') {
+                                board[k][j] = '*';
+                                break;
                             }
                         }
-                        if(flag_board[i-k][j]==2){
-                            if(board[i-k-1][j]!='W' && board[i-k-1][j]!='B'){
-                                board[i-k-1][j]='*';
+                    }
+                    if(board[i-1][j]=='B') {
+                        for (int k = i - 2; k >= 0; k--) {
+                            if (board[k][j] == 'W' || board[k][j] == '*') {
+                                break;
+                            }
+                            if (board[k][j] == '.') {
+                                board[k][j] = '*';
+                                break;
                             }
                         }
-                        if(flag_board[i][j+k]==2){
-                            if(board[i][j+k+1]!='W' && board[i][j+k+1]!='B'){
-                                board[i][j+k+1]='*';
+                    }
+                    if(board[i][j+1]=='B') {
+                        for (int k = j + 2; k < 8; k++) {
+                            if (board[i][k] == 'W' || board[i][k] == '*') {
+                                break;
+                            }
+                            if (board[i][k] == '.') {
+                                board[i][k] = '*';
+                                break;
                             }
                         }
-                        if(flag_board[i][j-k]==2){
-                            if(board[i][j-k-1]!='W' && board[i][j-k-1]!='B'){
-                                board[i][j-k-1]='*';
+                    }
+                    if(board[i][j-1]=='B') {
+                        for (int k = j - 2; k >= 0; k--) {
+                            if (board[i][k] == 'W' || board[i][k] == '*') {
+                                break;
+                            }
+                            if (board[i][k] == '.') {
+                                board[i][k] = '*';
+                                break;
                             }
                         }
-                        if(flag_board[i+k][j+k]==2){
-                            if(board[i+k+1][j+k+1]!='W' && board[i+k+1][j+k+1]!='B'){
-                                board[i+k+1][j+k+1]='*';
+                    }
+                    if(board[i+1][j+1]=='B') {
+                        for (int k = 1; i+k < 8 && j+k <8 ; k++) {
+                            if (board[i + k][j + k] == 'W' || board[i + k][j + k] == '*') {
+                                break;
+                            }
+                            if (board[i + k][j + k] == '.') {
+                                board[i + k][j + k] = '*';
+                                break;
                             }
                         }
-                        if(flag_board[i-k][j-k]==2){
-                            if(board[i-k-1][j-k-1]!='W' && board[i-k-1][j-k-1]!='B'){
-                                board[i-k-1][j-k-1]='*';
+                    }
+                    if(board[i-1][j-1]=='B') {
+                        for (int k = 1; i-k >= 0 && j-k>= 0; k++) {
+                            if (board[i - k][j - k] == 'W' || board[i - k][j - k] == '*') {
+                                break;
+                            }
+                            if (board[i - k][j - k] == '.') {
+                                board[i - k][j - k] = '*';
+                                break;
                             }
                         }
-                        if(flag_board[i+k][j-k]==2){
-                            if(board[i+k+1][j-k-1]!='W' && board[i+k+1][j-k-1]!='B'){
-                                board[i+k+1][j-k-1]='*';
+                    }
+                    if(board[i+1][j-1]=='B') {
+                        for (int k = 1; i+k < 8 && j-k >=0; k++) {
+                            if (board[i + k][j - k] == 'W' || board[i + k][j - k] == '*') {
+                                break;
+                            }
+                            if (board[i + k][j - k] == '.') {
+                                board[i + k][j - k] = '*';
+                                break;
                             }
                         }
-                        if(flag_board[i-k][j+k]==2){
-                            if(board[i-k-1][j+k+1]!='W' && board[i-k-1][j+k+1]!='B'){
-                                board[i-k-1][j+k+1]='*';
+                    }
+                    if(board[i-1][j+1]=='B') {
+                        for (int k = 1; i-k >=0 && j+k <8; k++) {
+                            if (board[i - k][j + k] == 'W' || board[i - k][j + k] == '*') {
+                                break;
+                            }
+                            if (board[i - k][j + k] == '.') {
+                                board[i - k][j + k] = '*';
+                                break;
                             }
                         }
-
                     }
                 }
             }
             else if(turn==2){
-                if(flag_board[i][j]==2){
-                    for(int k=1;k<4;k++){
-                        if(flag_board[i+k][j]==1){
-                            if(board[i+k+1][j]!='W' && board[i+k+1][j]!='B'){
-                                board[i+k+1][j]='*';
+                if(flag_board[i][j]==2) {
+                    if (board[i + 1][j] == 'W') {
+                        for (int k = i + 2; k < 8; k++) {
+                            if (board[k][j] == 'B' || board[k][j] == '*') {
+                                break;
+                            }
+                            if (board[k][j] == '.') {
+                                board[k][j] = '*';
+                                break;
                             }
                         }
-                        if(flag_board[i-k][j]==1){
-                            if(board[i-k-1][j]!='W' && board[i-k-1][j]!='B'){
-                                board[i-k-1][j]='*';
+                    }
+                    if (board[i - 1][j] == 'W') {
+                        for (int k = i - 2; k >= 0; k--) {
+                            if (board[k][j] == 'B' || board[k][j] == '*') {
+                                break;
+                            }
+                            if (board[k][j] == '.') {
+                                board[k][j] = '*';
+                                break;
                             }
                         }
-                        if(flag_board[i][j+k]==1){
-                            if(board[i][j+k+1]!='W' && board[i][j+k+1]!='B'){
-                                board[i][j+k+1]='*';
+                    }
+                    if (board[i][j + 1] == 'W') {
+                        for (int k = j + 2; k < 8; k++) {
+                            if (board[i][k] == 'B' || board[i][k] == '*') {
+                                break;
+                            }
+                            if (board[i][k] == '.') {
+                                board[i][k] = '*';
+                                break;
                             }
                         }
-                        if(flag_board[i][j-k]==1){
-                            if(board[i][j-k-1]!='W' && board[i][j-k-1]!='B'){
-                                board[i][j-k-1]='*';
+                    }
+                    if (board[i][j - 1] == 'W') {
+                        for (int k = j - 2; k >= 0; k--) {
+                            if (board[i][k] == 'B' || board[i][k] == '*') {
+                                break;
+                            }
+                            if (board[i][k] == '.') {
+                                board[i][k] = '*';
+                                break;
                             }
                         }
-                        if(flag_board[i+k][j+k]==1){
-                            if(board[i+k+1][j+k+1]!='W' && board[i+k+1][j+k+1]!='B'){
-                                board[i+k+1][j+k+1]='*';
+                    }
+                    if (board[i + 1][j + 1] == 'W') {
+                        for (int k = 1;  i+k < 8 && j+k <8 ; k++) {
+                            if (board[i + k][j + k] == 'B' || board[i + k][j + k] == '*') {
+                                break;
+                            }
+                            if (board[i + k][j + k] == '.') {
+                                board[i + k][j + k] = '*';
+                                break;
                             }
                         }
-                        if(flag_board[i-k][j-k]==1){
-                            if(board[i-k-1][j-k-1]!='W' && board[i-k-1][j-k-1]!='B'){
-                                board[i-k-1][j-k-1]='*';
+                    }
+                    if (board[i - 1][j - 1] == 'W') {
+                        for (int k = 1; i-k >= 0 && j-k>= 0; k++) {
+                            if (board[i - k][j - k] == 'B' || board[i - k][j - k] == '*') {
+                                break;
+                            }
+                            if (board[i - k][j - k] == '.') {
+                                board[i - k][j - k] = '*';
+                                break;
                             }
                         }
-                        if(flag_board[i+k][j-k]==1){
-                            if(board[i+k+1][j-k-1]!='W' && board[i+k+1][j-k-1]!='B'){
-                                board[i+k+1][j-k-1]='*';
+                    }
+                    if (board[i + 1][j - 1] == 'W') {
+                        for (int k = 1;i+k < 8 && j-k >=0; k++) {
+                            if (board[i + k][j - k] == 'B' || board[i + k][j - k] == '*') {
+                                break;
+                            }
+                            if (board[i + k][j - k] == '.') {
+                                board[i + k][j - k] = '*';
+                                break;
                             }
                         }
-                        if(flag_board[i-k][j+k]==1){
-                            if(board[i-k-1][j+k+1]!='W' && board[i-k-1][j+k+1]!='B'){
-                                board[i-k-1][j+k+1]='*';
+                    }
+                    if (board[i - 1][j + 1] == 'W') {
+                        for (int k = 1; i-k >=0 && j+k <8; k++) {
+                            if (board[i - k][j + k] == 'B' || board[i - k][j + k] == '*') {
+                                break;
+                            }
+                            if (board[i - k][j + k] == '.') {
+                                board[i - k][j + k] = '*';
+                                break;
                             }
                         }
-
                     }
                 }
             }
@@ -128,7 +218,17 @@ void positioning(char board[8][8],int turn){
             }
         }
     }
-
+}
+int positioncount(char board[8][8]){
+    int count=0;
+    for(int i=0;i<8;i++){
+        for(int j=0;j<8;j++){
+            if(board[i][j]=='*'){
+                count++;
+            }
+        }
+    }
+    return count;
 }
 void clear_positioning(char board[8][8]){
     for(int i=0;i<8;i++){
@@ -148,7 +248,7 @@ void reverse_dice(char board[8][8],int x,int y,int turn) {
         if (board[x][y] == '*') {
             board[x][y] = 'W';
             if (board[x + 1][y] == 'B') {
-                for (int i = x + 2; i < 8; i++) {
+                for (int i = x + 1; i < 8; i++) {
                     if (board[i][y] == 'W') {
                         for (int j = x + 1; j < i; j++) {
                             board[j][y] = 'W';
@@ -157,7 +257,7 @@ void reverse_dice(char board[8][8],int x,int y,int turn) {
                 }
             }
             if (board[x - 1][y] == 'B') {
-                for (int i = x - 2; i >= 0; i--) {
+                for (int i = x - 1; i >= 0; i--) {
                     if (board[i][y] == 'W') {
                         for (int j = x - 1; j > i; j--) {
                             board[j][y] = 'W';
@@ -166,7 +266,7 @@ void reverse_dice(char board[8][8],int x,int y,int turn) {
                 }
             }
             if (board[x][y + 1] == 'B') {
-                for (int i = y + 2; i < 8; i++) {
+                for (int i = y + 1; i < 8; i++) {
                     if (board[x][i] == 'W') {
                         for (int j = y + 1; j < i; j++) {
                             board[x][j] = 'W';
@@ -175,7 +275,7 @@ void reverse_dice(char board[8][8],int x,int y,int turn) {
                 }
             }
             if (board[x][y - 1] == 'B') {
-                for (int i = y - 2; i >= 0; i--) {
+                for (int i = y - 1; i >= 0; i--) {
                     if (board[x][i] == 'W') {
                         for (int j = y - 1; j > i; j--) {
                             board[x][j] = 'W';
@@ -225,7 +325,7 @@ void reverse_dice(char board[8][8],int x,int y,int turn) {
         if (board[x][y] == '*') {
             board[x][y] = 'B';
             if (board[x + 1][y] == 'W') {
-                for (int i = x + 2; i < 8; i++) {
+                for (int i = x + 1; i < 8; i++) {
                     if (board[i][y] == 'B') {
                         for (int j = x + 1; j < i; j++) {
                             board[j][y] = 'B';
@@ -234,7 +334,7 @@ void reverse_dice(char board[8][8],int x,int y,int turn) {
                 }
             }
             if (board[x - 1][y] == 'W') {
-                for (int i = x - 2; i >= 0; i--) {
+                for (int i = x - 1; i >= 0; i--) {
                     if (board[i][y] == 'B') {
                         for (int j = x - 1; j > i; j--) {
                             board[j][y] = 'B';
@@ -243,7 +343,7 @@ void reverse_dice(char board[8][8],int x,int y,int turn) {
                 }
             }
             if (board[x][y + 1] == 'W') {
-                for (int i = y + 2; i < 8; i++) {
+                for (int i = y + 1; i < 8; i++) {
                     if (board[x][i] == 'B') {
                         for (int j = y + 1; j < i; j++) {
                             board[x][j] = 'B';
@@ -252,7 +352,7 @@ void reverse_dice(char board[8][8],int x,int y,int turn) {
                 }
             }
             if (board[x][y - 1] == 'W') {
-                for (int i = y - 2; i >= 0; i--) {
+                for (int i = y - 1; i >= 0; i--) {
                     if (board[x][i] == 'B') {
                         for (int j = y - 1; j > i; j--) {
                             board[x][j] = 'B';
@@ -297,6 +397,14 @@ void reverse_dice(char board[8][8],int x,int y,int turn) {
                 }
             }
         }
+    }
+}
+void printturn(int turn){
+    if(turn==1){
+        printf("Turn of White\n");
+    }
+    else{
+        printf("Turn of Black\n");
     }
 }
 

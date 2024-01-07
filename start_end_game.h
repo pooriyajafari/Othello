@@ -1,4 +1,5 @@
 #include "stdio.h"
+#include "online_data.h"
 #ifndef OTHELLO_START_END_GAME_H
 #define OTHELLO_START_END_GAME_H
 void opening(){
@@ -25,5 +26,29 @@ void init_board(char board[8][8]){
     board[3][4]='B';
     board[4][3]='B';
     board[4][4]='W';
+}
+void main_menu(){
+    printf("1. Start new game\n");
+    printf("2. Load game\n");
+    printf("3. Scoreboard\n");
+    printf("4. Exit\n");
+    int choice;
+    scanf("%d",&choice);
+    if(choice==4){
+        printf("Goodbye!\n");
+        exit(0);
+    }
+
+}
+void ending(char name[2][20],char board[8][8]){
+    if(blacknum(board)<whitenum(board)){
+        printf("%s won\n",name[0]);
+    }
+    else if(blacknum(board)>whitenum(board)){
+        printf("%s won\n",name[1]);
+    }
+    else{
+        printf("draw\n");
+    }
 }
 #endif
