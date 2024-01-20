@@ -1,5 +1,6 @@
 #include "stdio.h"
 #include "online_data.h"
+
 #ifndef OTHELLO_GAME_ACTIONS_H
 #define OTHELLO_GAME_ACTIONS_H
 void print_board(char board[8][8]){
@@ -406,6 +407,15 @@ void printturn(int turn){
     else{
         printf("Turn of Black\n");
     }
+}
+void print_time(int remainingtime1,int remainingtime2) {
+    //print times to standard format(00:00)
+    int min1 = remainingtime1 / 60;
+    int sec1 = remainingtime1 % 60;
+    int min2 = remainingtime2 / 60;
+    int sec2 = remainingtime2 % 60;
+    printf("White remaining time: %d:%d\n", min1, sec1);
+    printf("Black remaining time: %d:%d\n", min2, sec2);
 }
 
 #endif
