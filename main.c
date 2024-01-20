@@ -31,6 +31,7 @@ int main(){
     opening();
     printf("Press any key to continue...\n");
     getchar();
+    input_name(names);
     system("cls");
     main_menu();
     int choice;
@@ -54,7 +55,7 @@ int main(){
             main();
         }
     }
-    input_name(names);
+
     system("cls");
 
     timing_game(names,board,turn,p1score,p2score);
