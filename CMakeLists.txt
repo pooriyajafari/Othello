@@ -8,6 +8,8 @@ add_executable(Othello main.c
         start_end_game.h
         online_data.h
         cJSON.c
-        game_modes_run.h)
+        game_modes_run.h
+        cryptdata.h
+        save_actions.h)
 
 

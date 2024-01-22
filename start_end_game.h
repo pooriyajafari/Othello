@@ -4,12 +4,12 @@
 #ifndef OTHELLO_START_END_GAME_H
 #define OTHELLO_START_END_GAME_H
 void opening(){
-    printf("    ******     ***********   **    **   **        **          ******\n");
-    printf("   *      *        **        **    **   **        **         *      *\n");
-    printf("  *        *       **        ********   **        **        *        *\n");
-    printf("  *        *       **        ********   **        **        *        *\n");
-    printf("   *      *        **        **    **   **        **         *      *\n");
-    printf("    ******         **        **    **   *******   *******     ******\n");
+    printf("    ******     ***********   **    **   ********   **        **          ******\n");
+    printf("   *      *        **        **    **   **         **        **         *      *\n");
+    printf("  *        *       **        ********   ********   **        **        *        *\n");
+    printf("  *        *       **        ********   ********   **        **        *        *\n");
+    printf("   *      *        **        **    **   **         **        **         *      *\n");
+    printf("    ******         **        **    **   ********   *******   *******     ******\n");
 }
 void input_name(char name[2][20]){
     printf("Enter name of player 1:\n");

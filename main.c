@@ -6,21 +6,10 @@
 #include "game_actions.h"
 #include "online_data.h"
 #include "start_end_game.h"
-struct saved_normal_game{
-    char board[8][8];
-    int turn;
-    int p1score;
-    int p2score;
-    char names[2][20];
-};
-struct saved_time_game{
-    char board[8][8];
-    int turn;
-    int p1score;
-    int p2score;
-    char names[2][20];
-    int time;
-};
+#include "cryptdata.h"
+#include "save_actions.h"
+#include "string.h"
+
 
 int main(){
     char names[2][20];
@@ -28,11 +17,16 @@ int main(){
     int turn=1;
     int p1score=0;
     int p2score=0;
+    int normal_games_count=0;
     opening();
     printf("Press any key to continue...\n");
     getchar();
+    system("cls");
     input_name(names);
     system("cls");
+//    char * output =NULL;
+//    decryptAffinecipherFile("data.json",output,5,7);
+//    struct saved_normal_game *games= convert_json_to_normal_game(output,&normal_games_count);
     main_menu();
     int choice;
     scanf("%d",&choice);
@@ -55,9 +49,5 @@ int main(){
             main();
         }
     }
-
-    system("cls");
-
-    timing_game(names,board,turn,p1score,p2score);
     return 0;
 }

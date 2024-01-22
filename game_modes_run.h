@@ -4,6 +4,8 @@
 #include "game_actions.h"
 #include "online_data.h"
 #include "start_end_game.h"
+#include "cryptdata.h"
+#include "save_actions.h"
 #ifndef OTHELLO_NORMAL_GAME_H
 #define OTHELLO_NORMAL_GAME_H
 int normal_game(char names[2][20],char board[8][8],int turn,int p1score,int p2score){
@@ -16,8 +18,15 @@ int normal_game(char names[2][20],char board[8][8],int turn,int p1score,int p2sc
 
     while(1){
         printturn(turn);
-        printf("enter x and y:\n");
-        scanf("%d %d",&x,&y);
+        int temp;
+        printf("enter x and y(xy):\n");
+        scanf("%d",&temp);
+//        if(temp==100){
+//            convert_normal_game_to_json();
+//
+//        }
+        x=temp/10;
+        y=temp%10;
         if(x>8||y>8||x<1||y<1){
             printf("invalid input\n");
             continue;
@@ -68,34 +77,112 @@ int timing_game(char names[2][20],char board[8][8],int turn,int p1score,int p2sc
     positioning(board,turn);
     print_number_of_beads(blacknum(board),whitenum(board));
     print_board(board);
+    print_backs(2,2);
     print_time(240,240);
     int x,y;
     int end=0;
     time_t p1time1= time(NULL),p2time1= time(NULL);
     time_t p1time2= time(NULL),p2time2= time(NULL);
     time_t remainingtime1=240,remainingtime2=240;
-
-    while(1){
+    char Wboardcpy1[8][8];
+    char Bboardcpy1[8][8];
+    int p1scorecpy,p2scorecpy;
+    int Wback=2,Bback=2;
+    time_t p1timecpy,p2timecpy;
+    while(1) {
+        if (remainingtime1 <= 0) {
+            printf("%s won\n", names[2]);
+            break;
+        }
+        if (remainingtime2 <= 0) {
+            printf("%s won\n", names[1]);
+            break;
+        }
         printf("enter x and y:\n");
         printturn(turn);
-        if (turn==1){
-            p1time1=time(NULL);
+        if (turn == 1) {
+            p1time1 = time(NULL);
             localtime(&p1time1);
-        }
-        else{
-            p2time1=time(NULL);
+        } else {
+            p2time1 = time(NULL);
             localtime(&p2time1);
         }
-        scanf("%d %d",&x,&y);
+        int temp;
+        scanf("%d", &temp);
+        if (temp == -1) {
+            if (turn == 1) {
+                if (Wback == 0) {
+                    printf("you can't back\n");
+
+                } else if (Wback == 2) {
+
+                    Wback--;
+                    remainingtime1 -= 30;
+                    p1score -= p1scorecpy;
+                    system("cls");
+                    print_number_of_beads(blacknum(board), whitenum(board));
+                    print_board(Wboardcpy1);
+                    print_time(remainingtime1, remainingtime2);
+                    continue;
+
+                } else if (Wback == 1) {
+
+                    Wback--;
+                    remainingtime1 -= 60;
+                    p1score -= p1scorecpy;
+                    remainingtime2 += p1timecpy + p2timecpy;
+                    system("cls");
+                    print_number_of_beads(blacknum(board), whitenum(board));
+                    print_board(Wboardcpy1);
+                    print_time(remainingtime1, remainingtime2);
+                    continue;
+
+                }
+            } else {
+                if (Bback == 0) {
+                    printf("you can't back\n");
+
+                } else if (Bback == 2) {
+
+                    Bback--;
+                    remainingtime2 -= 30;
+                    p2score -= p2scorecpy;
+                    system("cls");
+                    print_number_of_beads(blacknum(board), whitenum(board));
+                    print_board(Bboardcpy1);
+                    print_time(remainingtime1, remainingtime2);
+                    continue;
+
+
+                } else if (Bback == 1) {
+
+                    Bback--;
+                    remainingtime2 -= 60;
+                    p2score -= p2scorecpy;
+                    remainingtime1 += p1timecpy + p2timecpy;
+                    system("cls");
+                    print_number_of_beads(blacknum(board), whitenum(board));
+                    print_board(Bboardcpy1);
+                    print_backs(Wback, Bback);
+                    print_time(remainingtime1, remainingtime2);
+                    continue;
+                }
+            }
+
+        }
+        x=temp/10;
+        y=temp%10;
         if(turn==1){
             p1time2=time(NULL);
             localtime(&p1time2);
             remainingtime1-=difftime(p1time2,p1time1);
+            p1timecpy=difftime(p1time2,p1time1);
         }
         else{
             p2time2=time(NULL);
             localtime(&p2time2);
             remainingtime2-=difftime(p2time2,p2time1);
+            p2timecpy=difftime(p2time2,p2time1);
         }
         if(x>8||y>8||x<1||y<1){
             printf("invalid input\n");
@@ -110,12 +197,28 @@ int timing_game(char names[2][20],char board[8][8],int turn,int p1score,int p2sc
         }
         int Bnumcpy=blacknum(board);
         int Wnumcpy=whitenum(board);
+        if(turn==1){
+            for(int i=0;i<8;i++){
+                for(int j=0;j<8;j++){
+                    Wboardcpy1[i][j]=board[i][j];
+                }
+            }
+        }
+        else{
+            for(int i=0;i<8;i++){
+                for(int j=0;j<8;j++){
+                    Bboardcpy1[i][j]=board[i][j];
+                }
+            }
+        }
         reverse_dice(board,x,y,turn);
         if(turn==1){
             p1score+=whitenum(board)-Wnumcpy;
+            p1scorecpy=whitenum(board)-Wnumcpy;
         }
         else{
             p2score+=blacknum(board)-Bnumcpy;
+            p2scorecpy=blacknum(board)-Bnumcpy;
         }
         turn=turn%2+1;
         clear_positioning(board);
@@ -128,6 +231,7 @@ int timing_game(char names[2][20],char board[8][8],int turn,int p1score,int p2sc
                 system("cls");
                 print_number_of_beads(blacknum(board),whitenum(board));
                 print_board(board);
+                print_backs(Wback,Bback);
                 print_time(remainingtime1,remainingtime2);
                 break;
             }
@@ -138,6 +242,7 @@ int timing_game(char names[2][20],char board[8][8],int turn,int p1score,int p2sc
         system("cls");
         print_number_of_beads(blacknum(board),whitenum(board));
         print_board(board);
+        print_backs(Wback,Bback);
         print_time(remainingtime1,remainingtime2);
     }
     ending(names,board);

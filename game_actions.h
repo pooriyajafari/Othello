@@ -417,5 +417,8 @@ void print_time(int remainingtime1,int remainingtime2) {
     printf("White remaining time: %d:%d\n", min1, sec1);
     printf("Black remaining time: %d:%d\n", min2, sec2);
 }
-
+void print_backs(int Wback,int Bback){
+    printf("White backs: %d\n",Wback);
+    printf("Black backs: %d\n",Bback);
+}
 #endif
